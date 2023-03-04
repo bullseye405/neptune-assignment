@@ -1,5 +1,5 @@
 import { formatDecimalNumber } from "@/utils/general";
-import { Card, InputAdornment, TextField, Typography } from "@mui/material";
+import { Card, CardContent, InputAdornment, TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { useState } from "react";
 
@@ -20,8 +20,6 @@ const CurrencyConverter = () => {
   const handleInputChange = (value: string, input: CURRENCY) => {
     let sanitizedValue = value.replace(/[^\d.]/g, "");
 
-    console.log({ value, sanitizedValue });
-
     if (!isNaN(Number(sanitizedValue))) {
       if (input === CURRENCY.NEP) {
         setState((prev) => ({
@@ -41,40 +39,42 @@ const CurrencyConverter = () => {
 
   return (
     <Card variant="outlined">
-      <Box p={3}>
-        <Box className="heading">
-          <Typography variant="h3">Currency converter</Typography>
+      <CardContent>
+        <Box p={3}>
+          <Box className="heading">
+            <Typography variant="h3">Currency converter</Typography>
 
-          <Box>
-            <Typography fontWeight={500}>1 NEP = 3 BUSD</Typography>
+            <Box>
+              <Typography fontWeight={500}>1 NEP = 3 BUSD</Typography>
+            </Box>
+          </Box>
+
+          <Box my={2}>
+            <TextField
+              value={state.nep}
+              onChange={(e) => handleInputChange(e.target.value, CURRENCY.NEP)}
+              fullWidth
+              variant="outlined"
+              size="small"
+              InputProps={{
+                endAdornment: <InputAdornment position="end">NEP</InputAdornment>,
+              }}
+            />
+          </Box>
+          <Box my={2}>
+            <TextField
+              value={state.busd}
+              onChange={(e) => handleInputChange(e.target.value, CURRENCY.BUSD)}
+              fullWidth
+              variant="outlined"
+              size="small"
+              InputProps={{
+                endAdornment: <InputAdornment position="end">BUSD</InputAdornment>,
+              }}
+            />
           </Box>
         </Box>
-
-        <Box my={2}>
-          <TextField
-            value={state.nep}
-            onChange={(e) => handleInputChange(e.target.value, CURRENCY.NEP)}
-            fullWidth
-            variant="outlined"
-            size="small"
-            InputProps={{
-              endAdornment: <InputAdornment position="end">NEP</InputAdornment>,
-            }}
-          />
-        </Box>
-        <Box my={2}>
-          <TextField
-            value={state.busd}
-            onChange={(e) => handleInputChange(e.target.value, CURRENCY.BUSD)}
-            fullWidth
-            variant="outlined"
-            size="small"
-            InputProps={{
-              endAdornment: <InputAdornment position="end">BUSD</InputAdornment>,
-            }}
-          />
-        </Box>
-      </Box>
+      </CardContent>
     </Card>
   );
 };
