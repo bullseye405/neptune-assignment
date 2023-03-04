@@ -22,13 +22,13 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        <Grid container>
-          <Grid item lg={4}>
+        <Grid container spacing={6}>
+          <Grid item lg={6}>
             <CurrencyConverter />
           </Grid>
 
           {/* <Divider orientation="vertical" flexItem/> */}
-          <Grid item lg={7}>
+          <Grid item lg={6}>
             <WalletDetails />
           </Grid>
         </Grid>
